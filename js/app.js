@@ -9,3 +9,33 @@
 // Create authentication and create a new instance of firechat
 
 // Upon successful authentication, initiate firechat 
+
+	// Sign-up function
+	$scope.signUp = function() {
+		$scope.authObj.$createUser({
+			email: $scope.email,
+			password: $scope.password, 			
+		})
+		.then($scope.logIn)
+	}
+
+	// Login function
+	$scope.logIn = function() {
+		$scope.authObj.$authWithPassword({
+			email: $scope.email,
+			password: $scope.password
+		}).then(function(authData) {
+			  console.log("Logged in as:", authData.uid);
+			  $scope.userId = authData.uid
+			  // Initiate firechat here as well!
+			  
+		}).catch(function(error) {
+			  console.error("Authentication failed:", error);
+		});
+	}
+
+	$scope.logOut = function() {
+		$scope.authObj.$unauth()
+		$scope.userId = false
+	}
+
