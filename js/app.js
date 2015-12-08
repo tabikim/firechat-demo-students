@@ -29,6 +29,8 @@
 			  $scope.userId = authData.uid
 			  // Initiate firechat here as well!
 			  
+			  chat.setUser(authData.uid, authData.uid);
+			  
 		}).catch(function(error) {
 			  console.error("Authentication failed:", error);
 		});
@@ -38,4 +40,4 @@
 		$scope.authObj.$unauth()
 		$scope.userId = false
 	}
-
+})
